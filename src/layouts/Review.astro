@@ -1,0 +1,49 @@
+---
+import MainLayout from './MainLayout.astro';
+
+export interface Props {
+	cover: string;
+	name: string;
+	artist: string;
+	recommend: boolean;
+}
+
+const { cover, name, artist, recommend } = Astro.props;
+---
+
+<MainLayout title={`${name} - ${artist}`}>
+	<img class="cover" alt="Album cover" src={cover}>
+	<div class="review">
+		<h1 style="margin: 0px;">{name}</h1>
+		<h2 style="margin: 0px;">{artist}</h2>
+
+		<div>
+			<slot />
+
+			<p>{recommend ? "Would recommend 👍" : "Would not recommend 👎"}</p>
+		</div>
+	</div>
+</MainLayout>
+
+<style is:global>
+	body {
+		display: flex;
+		justify-content: flex-start;
+		align-items: flex-start;
+		column-gap: 20px;
+	}
+	.cover {
+		width: 19%;
+		min-width: 200px;
+		height: auto;
+		object-fit: contain;
+	}
+	.review {
+		display: flex;
+		flex-direction: column;
+		row-gap: 20px;
+	}
+	.copy {
+		width: 50%;
+	}
+</style>

@@ -1,0 +1,22 @@
+---
+import { getCollection, getEntryBySlug } from "astro:content";
+import Review from "../../layouts/Review.astro";
+
+export async function getStaticPaths() {
+	const news = await getCollection("reviews");
+  return news.map(({ slug }) => ({ params: { slug } }));
+}
+
+const { slug } = Astro.params;
+const {
+	render,
+	data: { cover, name, artist, recommend },
+} = (await getEntryBySlug("reviews", slug!))!;
+const { Content } = await render();
+---
+
+<Review cover={cover} name={name} artist={artist} recommend={recommend}>
+	<div style="width: 50%;">
+		<Content />
+	</div>
+</Review>

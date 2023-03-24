@@ -1,0 +1,25 @@
+---
+import { getCollection } from "astro:content";
+import MainLayout from "../layouts/MainLayout.astro";
+
+const reviews = await getCollection("reviews");
+---
+
+<MainLayout title="Music Reviews">
+	{reviews.map(review => (
+		<div style="width: 19%; height: auto">
+			<a style="width: 100%" href={`reviews/${review.data.link}`}>
+				<img style="width: 100%" src={review.data.cover}>
+			</a>
+		</div>
+	))}
+</MainLayout>
+
+<style>
+	body {
+		display: flex;
+		justify-content: flex-start;
+		align-items: flex-start;
+		column-gap: .5%;
+	}
+</style>
