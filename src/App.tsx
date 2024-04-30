@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import AlbumGrid from './AlbumGrid.tsx';
 
-function App() {
+const App = () => {
   const [albums, setAlbums]: [AlbumData[], Function] = useState([
     {
       mbid: '66e95974-2592-4ea3-b1f7-27e283f10877',
@@ -30,15 +30,23 @@ function App() {
   ]);
 
   useEffect(() => {
-    albums.map((album) => {
-      fetch('https://coverartarchive.org/release/' + album.mbid + '/front/')
-        .then((res) => { album.cover = res.url })
-        .catch((err) => {
-          console.log(err.message);
-        });
-    });
-
-    setAlbums(albums);
+    const fetchAlbumCover = async (album: AlbumData) => {
+      try {
+        fetch('https://coverartarchive.org/release/' + album.mbid + '/front/')
+          .then(res => {
+            setAlbums(albums.map(prevAlbum => {
+              if (prevAlbum.mbid === album.mbid) {
+                prevAlbum.cover = res.url;
+              }
+              return prevAlbum;
+            }));
+          });
+      } catch (error) {
+        console.error('Error fetching cover:', error);
+      }
+    };
+  
+    albums.forEach(album => fetchAlbumCover(album));
   }, []);
 
   const [showOverlay, setShowOverlay] = useState(false);

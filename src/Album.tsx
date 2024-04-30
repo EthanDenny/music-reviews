@@ -1,11 +1,11 @@
 import { MouseEventHandler } from 'react';
 import './AlbumGrid.css';
 
-function Album({ data, showReview, transformOrigin }: {
+const Album = ({ data, showReview, transformOrigin }: {
   data: AlbumData,
   showReview: MouseEventHandler,
   transformOrigin: string
-}) {
+}) => {
   return (
     <>
       <div className='album'>

@@ -1,4 +1,4 @@
-interface AlbumData {
+type AlbumData = {
   mbid: string
   artist: string
   title: string

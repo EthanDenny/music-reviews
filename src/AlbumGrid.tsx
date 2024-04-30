@@ -3,10 +3,11 @@ import './AlbumGrid.css';
 
 const COLUMN_COUNT: number = 8;
 
-function AlbumGrid({ albums, showReview }: {
+const AlbumGrid = ({ albums, showReview }: {
   albums: AlbumData[],
   showReview: Function
-}) {
+}) => {
+  console.log(albums);
   return (
     <>
       <div className='album-grid' style={{gridTemplateColumns: 'repeat(' + COLUMN_COUNT + ', 1fr)'}}>
