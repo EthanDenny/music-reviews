@@ -1,4 +1,5 @@
 import { MouseEventHandler } from 'react';
+import { AlbumData, getAlbumCover, getFullAlbumName } from './helpers.ts';
 import './AlbumGrid.css';
 
 const Album = ({ data, showReview, transformOrigin }: {
@@ -10,10 +11,10 @@ const Album = ({ data, showReview, transformOrigin }: {
     <>
       <div className='album'>
         <img
-          src={ data.cover }
-          alt={ '"' + data.title + '" by ' + data.artist }
-          style={ {transformOrigin: transformOrigin} }
-          onClick={ showReview }
+          src={ getAlbumCover(data) }
+          alt={ getFullAlbumName(data) }
+          style={{ transformOrigin: transformOrigin } }
+          onClick={showReview}
         />
       </div>
     </>

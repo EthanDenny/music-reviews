@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { AlbumData } from './helpers.ts';
 import Album from './Album.tsx';
 import './AlbumGrid.css';
 
@@ -35,7 +36,7 @@ const AlbumGrid = ({ albums, showReview }: {
   return (
     <>
       <div className='album-grid' style={{gridTemplateColumns: 'repeat(' + columnCount + ', 1fr)'}}>
-        {albums.map((albumData, index) => {
+        {albums.map((album, index) => {
           let transformOrigin = '';
 
           if (index < columnCount) {
@@ -55,9 +56,9 @@ const AlbumGrid = ({ albums, showReview }: {
           }
 
           return <Album
-            key={albumData.mbid}
-            data={albumData}
-            showReview={() => showReview(albumData.mbid)}
+            key={album.mbid}
+            data={album}
+            showReview={() => showReview(album.mbid)}
             transformOrigin={transformOrigin}
           />;
         })}
