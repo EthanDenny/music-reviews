@@ -76,6 +76,7 @@ const App = () => {
             width='25%'
           />
           <h2>{reviewData.score} / 10</h2>
+          <p>{reviewData.review}</p>
         </div>
       )}
     </>
