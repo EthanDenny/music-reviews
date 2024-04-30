@@ -65,6 +65,7 @@ const App = () => {
 
   return (
     <>
+      <h1>My Thoughts On Albums</h1>
       <AlbumGrid albums={albums} showReview={showReview} />
       {showOverlay && (
         <div id='lightbox' onClick={hideReview}>
