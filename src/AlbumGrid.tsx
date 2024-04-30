@@ -30,7 +30,7 @@ const AlbumGrid = ({ albums, showReview }: {
   showReview: Function
 }) => {
   const dimensions = useWindowDimensions();
-  const columnCount = Math.floor(dimensions.width / 240);
+  const columnCount = Math.max(Math.floor(dimensions.width / 240), 2);
 
   return (
     <>
