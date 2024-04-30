@@ -31,19 +31,18 @@ const App = () => {
 
   useEffect(() => {
     const fetchAlbumCover = async (album: AlbumData) => {
-      try {
-        fetch('https://coverartarchive.org/release/' + album.mbid + '/front/')
-          .then(res => {
-            setAlbums(albums.map(prevAlbum => {
-              if (prevAlbum.mbid === album.mbid) {
-                prevAlbum.cover = res.url;
-              }
-              return prevAlbum;
-            }));
-          });
-      } catch (error) {
-        console.error('Error fetching cover:', error);
-      }
+      fetch('https://coverartarchive.org/release/' + album.mbid + '/front/')
+        .then(res => {
+          setAlbums(albums.map(prevAlbum => {
+            if (prevAlbum.mbid === album.mbid) {
+              prevAlbum.cover = res.url;
+            }
+            return prevAlbum;
+          }));
+        })
+        .catch(error => {
+          console.error('Error fetching cover:', error);
+        });
     };
   
     albums.forEach(album => fetchAlbumCover(album));
