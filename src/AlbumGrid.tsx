@@ -3,45 +3,42 @@ import './AlbumGrid.css';
 
 const COLUMN_COUNT: number = 8;
 
-function AlbumGrid({ albums, covers, showReview }: {
-  albums: [string, string, string, number][],
-  covers: { [mbid: string]: string },
+function AlbumGrid({ albums, showReview }: {
+  albums: AlbumData[],
   showReview: Function
 }) {
   return (
     <>
       <div className='album-grid' style={{gridTemplateColumns: 'repeat(' + COLUMN_COUNT + ', 1fr)'}}>
-        {albums.map(([mbid, artist, title], index) => {
+        {albums.map((albumData, index) => {
           let transformOrigin = '';
 
           if (index < COLUMN_COUNT) {
-            transformOrigin += 'top'
+            transformOrigin += 'top';
           } else if (index >= albums.length - COLUMN_COUNT) {
-            transformOrigin += 'bottom'
+            transformOrigin += 'bottom';
           } else {
-            transformOrigin += ' center'
+            transformOrigin += ' center';
           }
       
           if (index % COLUMN_COUNT == 0) {
-            transformOrigin += ' left'
+            transformOrigin += ' left';
           } else if (index % COLUMN_COUNT == 7) {
-            transformOrigin += ' right'
+            transformOrigin += ' right';
           } else {
-            transformOrigin += ' center'
+            transformOrigin += ' center';
           }
 
           return <Album
-            key={mbid}
-            artist={artist}
-            title={title}
-            coverPath={covers[mbid]}
-            showReview={() => showReview(mbid)}
+            key={albumData.mbid}
+            data={albumData}
+            showReview={() => showReview(albumData.mbid)}
             transformOrigin={transformOrigin}
-          />
+          />;
         })}
       </div>
     </>
-  )
+  );
 }
 
 export default AlbumGrid
